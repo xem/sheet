@@ -1,7 +1,8 @@
+<meta charset=utf-8>
 <center style=font-family:arial>
 <a href=//github.com/xem/sheet><img style="position:absolute;top:0;right:0;border:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 <h1>Sheet</h1>
-<h3>A tiny spreadsheet in JS</h3>
+<h3>A 256b spreadsheet in HTML/JS</h3>
 Inspired by <a href="http://aem1k.com/sheet/">aem1k.com/sheet</a>
 <br>
 Golfed by xem, subzey, p01, rlauck, aemkei
@@ -9,18 +10,19 @@ Golfed by xem, subzey, p01, rlauck, aemkei
 <br>
 <br>
 <b>Code:</b>
-<pre style=text-align:left;font-family:courier;width:800px;margin:auto>
+<br>
+<br>
+<pre style=text-align:left;font-family:courier;width:800px;margin:auto;background:#def;padding:15px;border-radius:10px>
 &lt;script>function o(b){for(j in a)for(i in a)y=a[i]+-~j,b?document.write([["&lt;br>"
 ][i]]+"&lt;input onfocus=value=[o[id]] onblur=o[id]=value;o() id="+y+">"):(q=o[(c=
 top[y]).id])&&(eval("c.value"+q.replace(/[A-E]\d/g," +$&.value")))}o(a="ABCDE")
-&lt;/script><b>&lt;!--247b--></b>
+&lt;/script>
 </pre>
-<br>
-<br>
 <br>
 <b>Demo:</b>
 <br>
-Cells can contain text or numbers.
+<br>
+Cells can contain text, numbers or formulas.
 <br>
 Formulas start with =. Example: "=A1+8*B1".
 <br>
@@ -29,11 +31,15 @@ Formulas start with =. Example: "=A1+8*B1".
 <br>
 <b>Source:</b>
 <br>
-<a href="aem1k.html">@aemkei's version, trimmed (273b)</a>
 <br>
+<a href="aem1k.html">aem1k's version, trimmed (273b)</a>
+<br>&darr;<br>
 <a href="xem.html">new version (247b)</a>
-<br>
+<br>&darr;<br>
 <a href="xem-labels.html">new version with 9x9 grid and labels (256b)</a>
 <br>
 <br>
-&#169; 2014 xem
+<br>
+<br>
+<br>
+© 2014 <a href=//xem.github.io>Maxime Euzière</a>
