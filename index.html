@@ -1,10 +1,20 @@
-<center>
+<center style=font-family:arial>
 <a href=//github.com/xem/sheet><img style="position:absolute;top:0;right:0;border:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 <h1>Sheet</h1>
 <h3>A tiny spreadsheet in JS</h3>
-Inspired by <a href="http://aem1k.com/sheet/">aem1k.com/sheet</a>
+Inspired by <a href="http://aem1k.com/sheet/">aem1k.com/sheet</a>... but smaller :)
 <br>
-Golfed under 256b by xem, subzey, p01, rlauck, aemkei
+Golfed under by xem, subzey, p01, rlauck, aemkei
+<br>
+<br>
+<br>
+<b>Code:</b>
+<pre style=text-align:left;font-family:courier;width:800px;margin:auto>
+&lt;script>function o(b){for(j in a)for(i in a)y=a[i]+-~j,b?document.write([["&lt;br>"
+][i]]+"&lt;input onfocus=value=[o[id]] onblur=o[id]=value;o() id="+y+">"):(q=o[(c=
+top[y]).id])&&(eval("c.value"+q.replace(/[A-E]\d/g," +$&.value")))}o(a="ABCDE")
+&lt;/script><b>&lt;!--247b--></b>
+</pre>
 <br>
 <br>
 <br>
@@ -15,7 +25,7 @@ Cells can contain text or numbers.
 Formulas start with =. Example: "=A1+8*B1".
 <br>
 <pre id=t></pre>
-<script>function o(b){for(j in a="ABCDE")for(i in a)(y=a[i]+-~j,b)?t.innerHTML+=["\n"[i]]+"<input onfocus=value=[l[id]] onblur=l[id]=value;o() placeholder="+y+" id="+y+">":(q=l[(c=top[y]).id])&&(c.value=eval(q.replace("=","").replace(/([A-E]\d)/g," +$1.value")))}o(l=[]);</script>
+<script>function o(b){for(j in a="ABCDE")for(i in a)(y=a[i]+-~j,b)?t.innerHTML+=["\n"[i]]+"<input onfocus=value=[l[id]] onblur=l[id]=value;o() placeholder="+y+" id="+y+">":(q=l[(c=top[y]).id])&&(c.value=eval(q.replace("=","").replace(/([A-E]\d)/g," +$1.value")))}o(l=[])</script>
 <br>
 <b>Source:</b>
 <br>
