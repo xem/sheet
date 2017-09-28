@@ -1,47 +1,86 @@
 <meta charset=utf-8>
-<center style=font-family:arial>
+<style>
+main {
+	font-family: arial;
+	text-align: center;
+}
+mark {
+	background: #fe5;
+	padding: 3px;
+}
+p {
+	margin: 3px auto;
+}
+pre {
+	font-family: courier;
+	margin: auto;
+	background: #def;
+	padding: 15px;
+	border-radius: 10px;
+	white-space: pre-wrap;
+	max-width: 780px;
+}
+.grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: 0px;
+	grid-auto-rows: minmax(32px, auto);
+}
+input {
+	font-size: 18px;
+	min-width: 40px;
+}
+footer {
+	margin-top: 5em;
+}
+</style>
+
+<main>
 <a href=//github.com/xem/sheet><img style="position:absolute;top:0;right:0;border:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
-<mark style="background:#fe5;padding: 3px;">2017-09-28: <b>Hello Hacker News!</b> Wanna discover 100+ more golfed apps & games like this one? <a href="https://gist.github.com/xem/206db44adbdd09bac424">click here!</a></mark>
-<br>
+
+<mark>2017-09-28: <b>Hello Hacker News!</b> Wanna discover 100+ more golfed apps & games like this one? <a href="https://gist.github.com/xem/206db44adbdd09bac424">click here!</a></mark>
+
 <h1>Sheet</h1>
-<h3>A 220b spreadsheet app in HTML/JS</h3>
-Inspired by <a href="http://aem1k.com/sheet/">aem1k.com/sheet</a>
-<br>
-Golfed by xem, subzey, p01, rlauck, aemkei
-<br>
-<a href="https://github.com/xem/ama/issues/14">Related AMA answer</a>
-<br>
-<br>
-<br>
-<b>Code:</b>
-<br>
-<br>
-<pre style=text-align:left;font-family:courier;width:780px;margin:auto;background:#def;padding:15px;border-radius:10px>
-&lt;script>(o=b=>{for(j in a)for(i in a)y=a[i]+-~j,b?document.write([["&lt;p>"][
-i]]+"&lt;input onfocus=value=[o[id]] onblur=o[id]=value;o() id="+y+">"):eval(
-y+(".value"+o[y]).replace(/[A-Z]\d/g," +$&.value"))})(a="ABCD")&lt;/script>
-</pre>
-<br>
-<b>Demo:</b>
-<br>
-<br>
-Cells can contain text, numbers or formulas.
-<br>
-Formulas start with =. Example: "=A1+8*B2".
-<br><script>function o(b){for(j in a)for(i in a)y=a[i]+-~j,b?document.write([["<br>"][i]]+"<input onfocus=value=[o[id]] onblur=o[id]=value;o() id="+y+" placeholder="+y+">"):eval("top[y].value"+(""+o[y]).replace(/[A-G]\d/g," +$&.value"))}o(a="ABCDE")</script><br>
-<br>
-<br>
-<b>Source:</b>
-<br>
-<br>
-<a href="aem1k.html">aem1k's version, trimmed (272b)</a>
-<br>&darr;<br>
-<a href="xem.html">new version, mini (220b)</a>
-<br>&darr;<br>
-<a href="xem-labels.html">new version with labels and localStorage (256b)</a>
-<br>
-<br>
-<br>
-<br>
-<br>
-© 2014-2016 <a href=//xem.github.io>The Codegolf Team</a>
+
+<section>
+	<h3>A 220b spreadsheet app in HTML/JS</h3>
+
+	<p>Inspired by <a href="http://aem1k.com/sheet/">aem1k.com/sheet</a></p>
+	<p>Golfed by xem, subzey, p01, rlauck, aemkei</p>
+	<p><a href="https://github.com/xem/ama/issues/14">Related AMA answer</a></p>
+</section>
+
+
+<section>
+	<h4>Code:</h4>
+	<pre>&lt;script>(o=b=>{for(j in a)for(i in a)y=a[i]+-~j,b?document.write("&lt;input onfocus=value=[o[id]] onblur=o[id]=value;o() id="+y+">"):eval(
+y+(".value"+o[y]).replace(/[A-Z]\d/g," +$&.value"))})(a="ABCD")&lt;/script></pre>
+</section>
+
+
+<section>
+	<h4>Demo:</h4>
+
+	<p>Cells can contain text, numbers or formulas.</p>
+	<p>Formulas start with =. Example: "=A1+8*B2".</p>
+
+	<div class="grid">
+		<script>function o(b){for(j in a)for(i in a)y=a[i]+-~j,b?document.write("<input onfocus=value=[o[id]] onblur=o[id]=value;o() id="+y+" placeholder="+y+">"):eval("top[y].value"+(""+o[y]).replace(/[A-G]\d/g," +$&.value"))}o(a="ABCDE")</script>
+	</div>
+
+</section>
+
+
+<section>
+	<h4>Source:</h4>
+
+	<p><a href="aem1k.html">aem1k's version, trimmed (272b)</a></p>
+	&darr;
+	<p><a href="xem.html">new version, mini (220b)</a></p>
+	&darr;
+	<p><a href="xem-labels.html">new version with labels and localStorage (256b)</a></p>
+</section>
+
+<footer>© 2014-2016 <a href=//xem.github.io>The Codegolf Team</a></footer>
+
+</main>
