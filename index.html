@@ -4,10 +4,10 @@
 <mark style="background:#fe5;padding: 3px;">2017-09-28: <b>Hello Hacker News!</b> Wanna discover 100+ more golfed apps & games like this one? <a href="https://gist.github.com/xem/206db44adbdd09bac424">click here!</a></mark>
 <br>
 <h1>Sheet</h1>
-<h3>A 219b spreadsheet app in HTML/JS</h3>
+<h3>A 218b spreadsheet app in HTML/JS</h3>
 Inspired by <a href="http://aem1k.com/sheet/">aem1k.com/sheet</a>
 <br>
-Golfed by xem, subzey, p01, rlauck, aemkei
+Golfed by xem, subzey, p01, rlauck, aemkei, odensc, corruptio
 <br>
 <a href="https://github.com/xem/ama/issues/14">Related AMA answer</a>
 <br>
@@ -17,18 +17,21 @@ Golfed by xem, subzey, p01, rlauck, aemkei
 <br>
 <br>
 <pre style=text-align:left;font-family:courier;width:780px;margin:auto;background:#def;padding:15px;border-radius:10px>
-&lt;script>(o=b=>{for(j in a)for(i in a)y=a[i]+-~j,b?document.write([["&lt;p>"][
-i]]+"&lt;input onfocus=value=[o[id]] onblur=o[id]=value;o() id=${y}>"):eval(
-y+(".value"+o[y]).replace(/[A-Z]\d/g," +$&.value"))})(a="ABCD")&lt;/script>
+&lt;script>(o=b=>{for(j in a)for(i in a)y=a[i]+j,b?document.write(
+`&lt;${i*j?'input':'p'} onfocus=value=[o[id]] onblur=o[id]=value;o() id=${y}>`
+):eval(y+(".value"+o[y]).replace(/[A-Z]\d/g," +$&.value"))})(a="_ABCD")&lt;/script>
 </pre>
 <br>
+<br>
 <b>Demo:</b>
+<br>
+(with extra placeholders)
 <br>
 <br>
 Cells can contain text, numbers or formulas.
 <br>
 Formulas start with =. Example: "=A1+8*B2".
-<br><script>function o(b){for(j in a)for(i in a)y=a[i]+-~j,b?document.write([["<br>"][i]]+"<input onfocus=value=[o[id]] onblur=o[id]=value;o() id="+y+" placeholder="+y+">"):eval("top[y].value"+(""+o[y]).replace(/[A-G]\d/g," +$&.value"))}o(a="ABCDE")</script><br>
+<br><script>function o(b){for(j in a)for(i in a)y=a[i]+-~j,b?document.write([["<br>"][i]]+"<input onfocus=value=[o[id]] onblur=o[id]=value;o() id="+y+" placeholder="+y+">"):eval("top[y].value"+(""+o[y]).replace(/[A-G]\d/g," +$&.value"))}o(a="ABCD")</script><br>
 <br>
 <br>
 <b>Source:</b>
