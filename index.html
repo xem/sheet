@@ -16,10 +16,10 @@ Golfed by xem, subzey, p01, rlauck, aemkei, odensc, mmastrac, corruptio
 <b>Source code:</b>
 <br>
 <br>
-<pre style=text-align:left;font-family:courier;width:720px;margin:auto;background:#def;padding:15px;border-radius:10px>
-(o=v=>{for(i in{}+{})y="ABCD"[i%5]+-~(i/5),v?eval(y+(v+o[y]).replace(
-/[A-Z]\d/g," +$&"+v)):document.write(y||'&lt;p ',`&lt;input id=${y} onfocus
-=value=[o[id]] onblur=o[id]=value;o('.value')>`)})()
+<pre style=text-align:left;font-family:courier;width:650px;margin:auto;background:#def;padding:15px;border-radius:10px>
+(o=v=>{for(i in{}+{})y="ABCD"[i%5]+-~(i/5),v?eval(y+(v+o[y])
+.replace(/[A-Z]\d/g," +$&"+v)):document.write(y||'&lt;p ','input id=',
+y,' onfocus=value=[o[id]] onblur=o[id]=value;o`.value`>')})()
 </pre>
 <br>
 <br>
