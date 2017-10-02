@@ -4,7 +4,7 @@
 <mark style="background:#fe5;padding: 3px;">2017-09-28: <b>Hello Hacker News!</b> Discover 100+ more golfed apps & games <a href="https://gist.github.com/xem/206db44adbdd09bac424">here!</a></mark>
 <br>
 <h1>Sheet</h1>
-<h3>A 194b spreadsheet app in HTML/JS</h3>
+<h3>A 191b spreadsheet app in HTML/JS</h3>
 Inspired by <a href="http://aem1k.com/sheet/">aem1k.com/sheet</a>
 <br>
 Golfed by xem, subzey, p01, rlauck, aemkei, odensc, corruptio
@@ -16,10 +16,10 @@ Golfed by xem, subzey, p01, rlauck, aemkei, odensc, corruptio
 <b>Source code:</b>
 <br>
 <br>
-<pre style=text-align:left;font-family:courier;width:650px;margin:auto;background:#def;padding:15px;border-radius:10px>
-(o=b=>{for(i in{}+{})y="ABCD"[i%5]+-~(i/5),b?document.write(y||b
-,`&lt;input id=${y} onfocus=value=[o[id]] onblur=o[id]=value,o()>`)
-:eval(y+(".value"+o[y]).replace(/[A-Z]\d/g," +$&.value"))})`&lt;p `
+<pre style=text-align:left;font-family:courier;width:720px;margin:auto;background:#def;padding:15px;border-radius:10px>
+(o=v=>{for(i in{}+{})y="ABCD"[i%5]+-~(i/5),v?eval(y+(v+o[y]).replace(/[A-Z
+]\d/g," +$&"+v)):document.write(y?y+'&lt;input id='+y:'&lt;p',` onfocus=value=[o
+[id]] onblur=o[id]=value;o('.value')>`)})()
 </pre>
 <br>
 <br>
