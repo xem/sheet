@@ -4,7 +4,7 @@
 <mark style="background:#fe5;padding: 3px;">2017-09-28: <b>Hello Hacker News!</b> Discover 100+ more golfed apps & games <a href="https://gist.github.com/xem/206db44adbdd09bac424">here!</a></mark>
 <br>
 <h1>Sheet</h1>
-<h3>A 190b spreadsheet app in HTML/JS</h3>
+<h3>A 188b spreadsheet app in HTML/JS</h3>
 Inspired by <a href="http://aem1k.com/sheet/">aem1k.com/sheet</a>
 <br>
 Golfed by xem, subzey, p01, rlauck, aemkei, odensc, mmastrac, corruptio
@@ -17,9 +17,9 @@ Golfed by xem, subzey, p01, rlauck, aemkei, odensc, mmastrac, corruptio
 <br>
 <br>
 <pre style=text-align:left;font-family:courier;width:650px;margin:auto;background:#def;padding:15px;border-radius:10px>
-(o=v=>{for(i in{}+{})y="ABCD"[i%5]+-~(i/5),v?eval(y+(v+o[y])
-.replace(/[A-Z]\d/g," +$&"+v)):document.write(y||'&lt;p ','input id=',
-y,' onfocus=value=[o[id]] onblur=o[id]=value;o`.value`>')})()
+(o=v=>{for(i in z='&lt;input onblur=o[id]=value;o`.value` id=')y="
+ABCD"[i%5]+-~(i/5),v?eval(y+(v+o[y]).replace(/[A-Z]\d/g," +$&"+
+v)):document.write(y||'&lt;p ',z,y,' onfocus=value=[o[id]]>')})()
 </pre>
 <br>
 <br>
@@ -29,7 +29,7 @@ y,' onfocus=value=[o[id]] onblur=o[id]=value;o`.value`>')})()
 Cells can contain text, numbers or formulas (ex: "=A1+8*B2")
 <br>
 <br>
-<iframe style=transform:translateX(40px) src=mini.html frameborder=0 width=780 height=300></iframe>
+<iframe style=transform:translateX(40px) src=mini.html frameborder=0 width=780 height=350></iframe>
 <br>
 <br>
 © 2014-2017 <a href=//xem.github.io>The Codegolf Team</a>
