@@ -1,21 +1,80 @@
 <script>
+// 188b JS spreadsheet
+// ===================
+
+// The function `o` has three different uses:
+// - If it's called without any argument, it will draw a grit of 4 x 8 labels and cells.
+// - If it's called with an argument, it will evaluate all the cells' raw values and update their content with the result of this evaluation.
+// - Finally, it's used as an object, where all the cells' raw values are stored for future use.
+// Each cell has two values: the raw value (typed by the user) and the evaluated value (computed by the function `o`).
+// This script declares the function `o` and calls it immediately with no argument.
 (
-  o = b => {
-    for(j in a){
-      for(i in a){
-        y = a[i] + -~j,
-        b ?
-        document.write(
-          [["<p>"][i]] + "<input onfocus=value=[o[id]] onblur=o[id]=value;o() id=" + y + ">"
-        )
-        :
-        eval(
-          y + (".value" + o[y]).replace(/[A-Z]\d/g, " +$&.value")
-        )
-      }
+  o = v => {
+    
+    // The function `o` declares a string `z` with a length of 39 chars, and loops on all its characters with a loop var called `i`.
+    for(i in z = '<input onblur=o[id]=value;o`.value` id='){
+      
+      // In the loop, it declares a variable `y` representing the current cell's name (A1, B1, ..., C8, D8).
+      // The first char ("A", "B", "C" or "D") is picked from the string "ABCD", at the position `i % 5` (i modulo 5).
+      // The second char (the digit) is concatenated to the letter with the operaotr `+`. Its value is `-~(i / 5)`.
+      // `-~(i / 5)` is the opposite of the two's complement of `i / 5`, floored, which equals `Math.ceil(i / 5)` in our case.
+      // The 39-chars-long `z` generates "only" 4 x 8 cells because after each group of 4 cells, an extra `y` is generated with the value `NaN`.
+      // Each input also has an `id` attribute equal to y, so we can easily get or set its value with `A1.value` (for example).
+      y = "ABCD"[i % 5] + -~(i / 5),
+      
+      // Test if the argument `v` is set (as we will see later, when `v` is set, it always contains the string ".value")...
+      v
+      
+      // If it's set, the following expression will be evaluated for each cell: `y + (v + o[y]).replace(/[A-Z]\d/g, " +$&" + v)`
+      // For example, let's evaluate the cell `A1`. (i.e. `y` equals "A1" and `o["A1"]` contains the cell's raw value):
+      //
+      // - if the cell is empty, the value of `o["A1"]` is either "" or `undefined`.
+      //   so we will evaluate `A1 + (".value" + undefined).replace(/[A-Z]\d/g, " +$&" + ".value")`
+      //   which will do nothing ("A1.valueundefined" fails silently, so the cells keeps its raw value: "").
+      //
+      // - if the cell contains a number (ex: 2), the value of `o["A1"] is 2.
+      //   so we will evaluate `A1 + (".value" + 2).replace(/[A-Z]\d/g, " +$&" + ".value")`
+      //   which will do nothing ("A1.value2" fails silently, so the cell keeps its raw value: 2).
+      //
+      // - if the cell contains a formula (ex: "=B1+2"), the vaue of `o["A1"] is "=B1+2".
+      //   so we will evaluate `A1 + (".value" + "=B1+2").replace(/[A-Z]\d/g, " +$&" + ".value")`
+      //   which is the same as "A1.value= +B1.value+2",
+      //   which will compute the formula " +B1.value+2" and put the result in A1.
+      //   the first "+" ensures that B1's value is transformed into a Number
+      //   the space ensures that the values of two cells can be added without JS bugs
+      //   ex: "=B1+C1" becomes "= +B1.value+ +C1.value".If we remove the spaces, it wouldn't work anymore.
+      //
+      // Finally, when `y` is `NaN`,
+      // we will evaluate `NaN + (".value" + o[NaN]).replace(/[A-Z]\d/g, " +$&" + ".value")`,
+      // which will do nothing ("NaN.valueundefined" fails silently).
+      ?
+      eval(
+        y + (v + o[y]).replace(/[A-Z]\d/g, " +$&" + v)
+      )
+      
+      // If v is not set, we initialize the page, one cell at the time:
+      // - if `y` is set (ex: 'A1'), we write `y, z, y, ' onfocus=value=[o[id]]>'`
+      //   which, after the concatenation of each part, becomes: "A1<input onblur=o[id]=value;o`.value` id=A1 onfocus=value=[o[id]]>"
+      //   as you can see, this string represents the cell's label followed by an input that has the id "A1" and two events:
+      //
+      //   * onblur=o[id]=value;o`.value` :
+      //     as soon as the cell loses focus,
+      //     this event will store the raw value of the cell (`this.value`) in `o[this.id]` (`this` can be omitted),
+      //     then call the function `o` with the argument `.value` (parenthesis aren't required around template literal arguments)
+      //
+      //   * onfocus=value=[o[id]]
+      //     as soon as the cell is focused,
+      //     this event will put the raw value of the cell ([o[this.id]]) in `this.value` (to let the user see his formulae).
+      //     `o[this.id]` is surrounded by an array (`[]`) to avoid putting the string "undefined" in a focused empty cell.
+      //     the arrat `[undefined]` coerces into an empty string, which is what we want to keep a cell empty.
+      //
+      // - if `y` is NaN, it will prepend "<p" instead of the label (thanks to the test `y || '<p '`)
+      //   This <p> tag will have garbage attributes (one called "<input", one id="NaN", plus onblur and onfocus,
+      //   but they won't have any use whatsoever. The <p> tag is only used to go on a new line
+      document.write(
+        y || '<p ', z, y, ' onfocus=value=[o[id]]>'
+      )
     }
   }
-)(
- a = "ABCD"
-)
+)()
 </script>
