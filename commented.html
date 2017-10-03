@@ -21,30 +21,30 @@
       // `-~(i / 5)` is the opposite of the one's complement of `i / 5`, floored, which equals `Math.ceil(i / 5)` in our case.
       // It helps us number our cells from 1 to 8, and not from 0 to 7, and ceils the decimal part of `i / 5` in the meantime.
       // The 39-chars-long string `z` generates "only" 4 x 8 cells because after each group of 4 cells, an extra `y` is generated with the value `NaN`.
-      // Each input also has an `id` attribute equal to y, so we can easily get or set the value of A1 (for example) using `A1.value`.
+      // Each input also has an `id` attribute equal to `y`, so we can easily get or set the value of A1 (for example) using `A1.value`.
       y = "ABCD"[i % 5] + -~(i / 5),
       
-      // Let's test if the argument `v` is set (as we will see later, when `v` is set, it always contains the string ".value")...
+      // Let's test if the argument `v` is set (as we will see later, when `v` is set, it contains the string ".value")...
       v
       
-      // If it's set, the following expression will be evaluated for each cell: `y + (v + o[y]).replace(/[A-Z]\d/g, " +$&" + v)`
+      // If v is set, the following expression will be evaluated for each cell: `y + (v + o[y]).replace(/[A-Z]\d/g, " +$&" + v)`
       // For example, let's evaluate the cell `A1`. (i.e. `y` equals "A1" and `o["A1"]` contains the cell's raw value):
       //
       // - if the cell is empty, the raw value `o["A1"]` is either "" (if the cell has already been emptied manually) or `undefined` (if it hasn't been visited yet).
-      //   so we will evaluate `A1 + (".value" + undefined).replace(/[A-Z]\d/g, " +$&" + ".value")`
+      //   So we will evaluate `A1 + (".value" + undefined).replace(/[A-Z]\d/g, " +$&" + ".value")`,
       //   which will do nothing ("A1.valueundefined" fails silently, so the cell keeps its empty value).
       //
       // - if the cell contains a number (ex: 2), the raw value `o["A1"] is 2.
-      //   so we will evaluate `A1 + (".value" + 2).replace(/[A-Z]\d/g, " +$&" + ".value")`
+      //   So we will evaluate `A1 + (".value" + 2).replace(/[A-Z]\d/g, " +$&" + ".value")`,
       //   which will do nothing ("A1.value2" fails silently, so the cell keeps its raw value: 2).
       //
       // - if the cell contains a formula (ex: "=B1+2"), the raw value of `o["A1"] is "=B1+2".
-      //   so we will evaluate `A1 + (".value" + "=B1+2").replace(/[A-Z]\d/g, " +$&" + ".value")`
+      //   So we will evaluate `A1 + (".value" + "=B1+2").replace(/[A-Z]\d/g, " +$&" + ".value")`,
       //   which is the same as "A1.value= +B1.value+2",
-      //   which will compute the formula " +B1.value+2" and put the result in A1. (nice: that's how we want the formulae to work)
-      //   the regex is used to replace each cell id (capital letter + digit) found in the formula with the same value plus the string ".value".
-      //   the "+" ensures that B1's value is transformed into an integer.
-      //   the space ensures that the values of two cells can be added without JS bugs.
+      //   which will compute the formula "+B1.value+2" and put the result in the cell A1. (nice: that's how we want the formulae to work).
+      //   The regex is used to replace each cell's id (capital letter + digit) found in the formula with the same value plus the string ".value".
+      //   The "+" ensures that B1's value is transformed into an integer.
+      //   The space ensures that the values of two cells can be added without JS bugs.
       //   ex: "=B1+C1" becomes "= +B1.value+ +C1.value".If we removed the spaces, it wouldn't work anymore.
       //
       // Finally, when `y` is `NaN`,
@@ -67,13 +67,13 @@
       //
       //   * onfocus=value=[o[id]]
       //     as soon as the cell is focused,
-      //     this event will put the raw value of the cell ([o[this.id]]) in `this.value` (to let the user see his formulae again).
+      //     this event will put the raw value of the cell (`[o[this.id]]`) in `this.value` (to let the user see his original formula).
       //     `o[this.id]` is surrounded by an array (`[]`) to avoid putting the string "undefined" in a focused empty cell.
       //     the array `[undefined]` coerces into an empty string, which is what we want here (keep the empty cells empty).
       //
       // - if `y` is NaN, it will prepend "<p" instead of the label (thanks to the test `y || '<p '`)
-      //   This <p> tag will have garbage attributes (one called "<input", one `id="NaN"`, plus onblur and onfocus event listeners,
-      //   but none of these attributes will have any use whatsoever. The <p> tag is only used to go on a new line.
+      //   This <p> tag will have garbage attributes (one called "<input", another `id="NaN"`, plus onblur and onfocus event listeners,
+      //   but none of these attributes will have any use whatsoever. The <p> tag is only used to start a new line.
       :
       document.write(
         y || '<p ', z, y, ' onfocus=value=[o[id]]>'
