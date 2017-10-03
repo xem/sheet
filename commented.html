@@ -1,4 +1,5 @@
 <script>
+
 // 188b JS spreadsheet
 // ===================
 
@@ -73,10 +74,12 @@
       // - if `y` is NaN, it will prepend "<p" instead of the label (thanks to the test `y || '<p '`)
       //   This <p> tag will have garbage attributes (one called "<input", one `id="NaN"`, plus onblur and onfocus event listeners,
       //   but none of these attributes will have any use whatsoever. The <p> tag is only used to go on a new line.
+      :
       document.write(
         y || '<p ', z, y, ' onfocus=value=[o[id]]>'
       )
     }
   }
 )()
+
 </script>
