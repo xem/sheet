@@ -31,6 +31,6 @@ localStorage.D5 = "=-~(C5<<2)";
 
 /* Sheet */
 
-r=y=>c++<99&&eval(l[y]&&y+'.value='+(l[y][0]=="="?`(_=0,_+${l[y].replace(/[A-Z]\d/g,r)})`:`'${l[y]}'`)),o=b=>{for(i in{}+{})y='ABCD'[c=i%5]+-~(i/5),b?document.write(y?y+'<input id='+y:'<p',' onfocus=value=[l[id]] onblur=l[id]=value;o()>'):r(y)};o(o(l=localStorage))
+r=y=>`(${y}.value=[x${/^=/.test(z=l[y])?z.replace(/[A-Z]\d/g,c++<99&&r):'=l.'+y}],x-~x?+x:x)`,o=b=>{for(i in{}+{})y='ABCD'[c=i%5]+-~(i/5),b?document.write(y?y+'<input id='+y:'<p',` onfocus=value=[l[id]] onblur=l[id]=value,o()>`):eval(r(y))};o(o(l=localStorage))
 
 </script>
