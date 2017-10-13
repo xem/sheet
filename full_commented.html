@@ -1,0 +1,145 @@
+<script>
+
+// Sheet! 
+// ======
+
+// a sub-256b full-featured JS spreadsheet
+// =======================================
+
+// This app creates a spreadsheet of 4 x 6 cells supporting:
+// - any value: text, number or float (ex: `Hi!` or `8` or `1.234`).
+// - formulae (ex: `=A1+8`), visible when a cell is focused and executed on blur.
+// - implicit `Math` in formulae (ex: `=sqrt(A1)`).
+// - updates all the grid in cascade when a cell value changes.
+// - protection against auto or circular references.
+// - localStorage persistence.
+
+// We start by declaring the function `o`. This function has two uses:
+// - If it's called with an argument `b`, it will initialize and draw all the spreadsheet in HTML.
+// - It it's called with no argument, it will evaluate all the cells and update their values.
+o = b => {
+  
+  // This weird `for` statement is used to make a loop that iterates a lot of times, by using very few characters.
+  // `{} + o` generates a 245-chars string containing the String value of `{}` ("[object Object]"),
+  // followed by all the source code of `o`. ("b=>{for(i in{}+o) ... x-~x?+x:x)}").
+  // Minified, `for(i in{}+o)` is 5 chars shorter than the equivalent `for(i=0;i<245;i++)`.
+  // `i` is the loop var going from 0 to 245.
+  for(i in {} + o){
+  
+    // All the following code is executed with `Math` implied.
+    // This allows to call Math functions in formulae, without writing "Math.",
+    // but the Math object (`M`) will also be used to store all the cells values before they're evaluated (especially the formulae).
+    with(M = Math){
+    
+      // The string `y` represents the current cell's name.
+      // It is built by concatenating the (i%5)'th char of 'ABCD',
+      // and `-~(i/5%6)`, which is equivalent to `1 + Math.floor(((i / 5) % 6))` (this is needed to name the first line "1" instead of "0").
+      // So in each loop, `y` gets a value from this list: "A1", "B1", "C1", "D1", NaN, "A2", "B2", ..., "C6", "D6", NaN, then it gets back to "A1" , "A2", ...
+      // We then store data in `M[y]`, according to the value of `b`:
+      M[y = 'ABCD'[i % 5] + -~(i / 5 % 6)] =
+      
+      // If `b` is set:
+      b ?
+      
+      // We use the first 30 values of `y` to render the grid in HTML:
+      document.write(
+        
+        (
+        
+          // If `y` is truthy and lower than 30:
+          // (the limit of 30 ensures that the grid keeps a 24 cells + 6 line breaks)
+          y && i < 30
+        
+          // write the beginning of an <input> tag, with the attributes "placeholder" and "id" equal to `y`.
+          ? `<input placeholder=${y} id=` + y
+          
+          // if `y` is NaN, write the beginning of a <br> tag instead, to pass on a new line.
+          : '<br'
+        ),
+        
+        // then write the end of the current tag, including two event listeners:
+        //
+        //  `onblur=l[id]=value;o()`:
+        //  as soon as a cell loses focus,
+        //  this event will store the value of the cell (`this.value`) in `l[this.id]` (`l` represents `localStorage`, and the  two `this` are implicit),
+        //  then it will call the function `o()` with no argument to evaluate all the cells.
+        //
+        //  `onfocus=value=[l[id]]`:
+        //  as soon as the cell is focused,
+        //  this event will put the stored cell value (`l[this.id]`) in `this.value` (so the user can see his original formula).
+        //  `l[this.id]` is surrounded by an array (`[]`) to avoid writing "undefined" when we focus an empty cell.
+        //  indeed, the array `[undefined]` coerces into an empty string, which is what we want here (keep the empty cells empty on focus).
+        ` onfocus=value=[l[id]] onblur=l[id]=value,o()>`
+        
+        // You may notice that the <br>'s also get an id, a placeholder and two event listeners, but they don't have any use.
+        // It just saves a few chars to use the same ending for both <br> and <input> tags.
+        // The result of `document.write` (i.e. undefined) is stored in `M[y]`, which also has no effect.
+        // It just saves a few chars to use the same assignment `M[y]=` whether `b` is set or not.
+      )
+      
+      // If `b` is not set:
+      :
+      
+      // the loop is not limited to 30 iterations anymore, so the following code is executed 8 to 9 times for each cell of the spreadsheet.
+      // These passes allow to execute deeply nested formulae and avoid browser-freezing, infinite circular references,
+      // which could occur if we had executed each formula as soon as its cell's value changes.
+      (
+        // `top[y]` is the input tag with the id `y`. We're updating its content according to the following rules:
+        top[y].value = [
+        
+          // If the stored value of the cell (called `z`) starts with a "=", then it's a formula.
+          // We use `/^=/.test(z)` here instead of `z[0]=="="` to avoid breaking when `l[y]` is undefined.
+          /^=/.test(z = l[y]) ?
+          
+          // We eval the string `'x'+z`.
+          // Ex: if the stored formula of A1 is "=A2+2", then we eval the string 'x=A2+2".
+          // here, `A2` represents the value of the cell A2 which has been previously stored in `M`.
+          // Indeed, if we consider the surrounding `with(M=Math)`, the string we execute is equivalent to 'x=M.A2+2'.
+          // So, `x` contains the the saved value of `A2`, plus 2.
+          // If A2 contains a number, it'll work instantly.
+          // But if A2 contains a formula (for example "=A3+8", and A3 contains "5"), A1's `x` will not get its value instantly.
+          // For the cell A1, the computed value of `x` will get a garbage value, but for A2, it will get computed fine as 5+8 = 13.
+          // By chance, there are many "eval" passes on the grid's cells, and at the second pass, A1 will be evaluated correctly:
+          // This time, 'x=M.A2+2' will now equal 'x=13+2' and `x` will contain the number 15.
+          eval('x' + z)
+          :
+          
+          // If `z` is not a formula (i.e. number or text), it's put it directly in x, as a string.
+          x = z
+        ],
+        
+        // Now it's time to decide what to store in `M[y]`:
+        // if (x-~x) is not truthy, it means that x is a string representing an integer or a float.
+        // We use this formula instead of "+x" to also support the number "0" (because "0"-~"0" == 1)
+        x - ~x ?
+        
+        // In this case, we store `+x` (similar to `parseFloat(x)`) in `M[y]`.
+        +x
+        
+        // Else, if `x` contains text:
+        :
+        
+        // We store that text in `M[y]`.
+        x
+      )
+      
+      // When a parenthesis contains many statements like here, all are executed, but only the last one is returned,
+      // That's why `M[y]=(..., x-~x?+x:x)` successfully stores `+x` or `x` in `M[y]`
+      
+    };
+  }
+}
+
+// Finally, let's declare `l` as a shortcut for `localStorage`,
+// then call `o()` a first time with `l` as argument. `localStorage` is truthy, so `o` will draw the grid.
+// Then call `o()` a second time with the return of the first call as argument.
+// But `o()` returns `undefined`, so this time, all the cells are filled with the values stored in localStorage and all the formulae are evaluated.
+o(
+  o(
+    l = localStorage
+  )
+)
+
+// The End
+
+</script>
