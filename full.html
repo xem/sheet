@@ -1,34 +1,7 @@
 <script>
-
-/* Tests */
-
-localStorage.clear();
-
-localStorage.A1 = "=A2+1";
-localStorage.A2 = "=A3+1";
-localStorage.A3 = "=A4+1";
-localStorage.A4 = "1";
-
-localStorage.B1 = "=1.1";
-localStorage.B2 = "1.1";
-localStorage.B3 = "=B1+B2*10";
-localStorage.B4 = "0";
-
-localStorage.C1 = "=C1+1";
-localStorage.C2 = "=C3+1";
-localStorage.C3 = "=C2+1";
-localStorage.C4 = "=D4";
-
-localStorage.D1 = "=D2+D3";
-localStorage.D2 = "=D1+D3";
-localStorage.D3 = "=D1+D2";
-localStorage.D4 = "1";
-
-localStorage.A5 = "TEST";
-localStorage.B5 = "=B2**8";
-localStorage.C5 = "=Math.sqrt(B5)";
-localStorage.D5 = "=-~(C5<<2)";
-
-/* Sheet */
 o=b=>{for(i in{}+o)with(M=Math)M[y='ABCD'[i%5]+-~(i/5%6)]=b?document.write(y&&i<30?`<input placeholder=${y} id=`+y:'<br',` onfocus=value=[l[id]] onblur=l[id]=value,o()>`):(top[y].value=[/^=/.test(z=l[y])?eval('x'+z):x=z],x-~x?+x:x)};o(o(l=localStorage))
 </script>
+
+<style>
+html,body { overflow: hidden }
+</style>

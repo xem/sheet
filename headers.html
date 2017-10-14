@@ -1,33 +1,10 @@
 <script>
-/* Tests */
-localStorage.clear();
-localStorage.A1 = "=A2+1";
-localStorage.A2 = "=A3+1";
-localStorage.A3 = "=A4+1";
-localStorage.A4 = "1";
-localStorage.B1 = "=1.1";
-localStorage.B2 = "1.1";
-localStorage.B3 = "=B1+B2*10";
-localStorage.B4 = "0";
-localStorage.C1 = "=C1+1";
-localStorage.C2 = "=C3+1";
-localStorage.C3 = "=C2+1";
-localStorage.C4 = "=D4";
-localStorage.D1 = "=D2+D3";
-localStorage.D2 = "=D1+D3";
-localStorage.D3 = "=D1+D2";
-localStorage.D4 = "1";
-localStorage.A5 = "TEST";
-localStorage.B5 = "=B2**8";
-localStorage.C5 = "=Math.sqrt(B5)";
-localStorage.D5 = "=-~(C5<<2)";
-
 /* Sheet */
 with(M=Math)o=b=>{for(i in{}+o)(top[y=(C='-ABCD'[r=i%6])+(R=~~(i%35/6))]||o).value=[x=/^=/.test(z=i<35?b&&document.write(y?'<input id='+y:'<p',R&&r?` onfocus=value=[l[id]] onblur=l[id]=value,o()>`:' disabled>'):l[y])?eval('x'+z):R?r?z:R:C],M[y]=x-~x?+x:x};o(o(l=localStorage))
 </script>
 
-/* Optional styles */
 <style>
+/* Optional styles */
 input{border: 1px solid #999;padding: .5em;}
 input[disabled]{text-align: center;background-color:#eee;}
 input:first-child[disabled]{text-align: right;}

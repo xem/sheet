@@ -4,17 +4,59 @@
 <mark style="background:#fe5;padding: 3px;">2017-09-28: <b>Hello Hacker News!</b> Discover 100+ more golfed apps & games <a href="https://gist.github.com/xem/206db44adbdd09bac424">here!</a></mark>
 <br>
 <h1>Sheet</h1>
-<h3>A 188b spreadsheet app in HTML/JS</h3>
+<h3>A 188b/253b spreadsheet app in HTML/JS</h3>
 <br>
 Inspired by <a href="http://aem1k.com/sheet/">aem1k.com/sheet</a> and <a href="http://jsfiddle.net/ondras/hYfN3/">this 30-line app</a>
 <br>
-Golfed by xem, subzey, p01, rlauck, aemkei, odensc, mmastrac, corruptio
+Golfed by <a href=//xem.github.io>xem</a>, subzey, <a href=//p01.org>p01</a>, rlauck, <a href=//aem1k.com>aemkei</a>, odensc, mmastrac, <a href=//blog.jay.vg>corruptio</a>
 <br>
-<a href="https://github.com/xem/ama/issues/14">Related AMA answer</a>
+More <a href="https://github.com/xem/ama/issues/14">backstory</a> (2015)
 <br>
 <br>
+<hr>
+<h2>Full (253b)</h2>
+<b>Features</b>
 <br>
-<b>Source code:</b> (<a href="https://github.com/xem/sheet/blob/gh-pages/commented.html">commented source code</a>)
+<br>
+supports any value: texts, numbers, floats, and formulae. Ex: "=A1+8"
+<br>
+cells update in cascade, circular reference protection
+<br>
+implicit Math object. Ex: "=sqrt(A1)"
+<br>
+localStorage persistence
+<br>
+<br>
+<b>Source code:</b>
+<br>
+<br>
+(<a href="https://github.com/xem/sheet/blob/gh-pages/full-commented.html">commented source code</a>)
+<br>
+<br>
+<pre style=text-align:left;font-family:courier;width:650px;margin:auto;background:#def;padding:15px;border-radius:10px>
+o=b=>{for(i in{}+o)with(M=Math)M[y='ABCD'[i%5]+-~(i/5%6)]=b?document
+.write(y&&i&lt;30?`&lt;input placeholder=${y} id=`+y:'&lt;br',` onfocus=value
+=[l[id]] onblur=l[id]=value,o()>`):(top[y].value=[/^=/.test(z=l[y])?
+eval('x'+z):x=z],x-~x?+x:x)};o(o(l=localStorage))
+</pre>
+<br>
+<b>Demo:</b>
+<br>
+<br>
+<iframe style=transform:translateX(100px) src=full.html frameborder=0 width=800 height=200></iframe>
+<br>
+<br>
+<hr>
+<br>
+<h2>Minimal (188b)</h2>
+Supports numbers and formulae.
+<br>
+updates in cascade and prevents circular references.
+<br>
+<br>
+<b>Source code:</b>
+<br>
+(<a href="https://github.com/xem/sheet/blob/gh-pages/mini-commented.html">commented source code</a>)
 <br>
 <br>
 <pre style=text-align:left;font-family:courier;width:650px;margin:auto;background:#def;padding:15px;border-radius:10px>
@@ -22,17 +64,18 @@ Golfed by xem, subzey, p01, rlauck, aemkei, odensc, mmastrac, corruptio
 ABCD"[i%5]+-~(i/5),v?eval(y+(v+o[y]).replace(/[A-Z]\d/g," +$&"+
 v)):document.write(y||'&lt;p ',z,y,' onfocus=value=[o[id]]>')})()
 </pre>
-
-<br>
 <br>
 <b>Demo:</b>
 <br>
 <br>
-Cells can contain text, numbers or formulas (ex: "=A1+8*B2")
-<br>
-<br>
 <iframe style=transform:translateX(50px) src=mini.html frameborder=0 width=800 height=350></iframe>
+
+
 <br>
 <br>
 © 2014-2017 <a href=//register.jsgolf.club>The Codegolf Team</a>
-<br>(Our websites: <a href=//p01.org>p01</a>, <a href=//aem1k.com>aemkei</a>, <a href=//xem.github.io>xem</a>, <a href=//blog.jay.vg/>corruptio</a>)
+
+<style>
+a { color: #000; }
+hr { width: 500px }
+</style>
